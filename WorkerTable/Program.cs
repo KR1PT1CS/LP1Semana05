@@ -13,11 +13,23 @@ namespace WorkerTable
             Randomizer.Seed = new Random(int.Parse(args[0]));
             Faker faker = new Faker ("pt_PT");
             
-            var columns = new List<Faker>(){
-            new Faker("Item 1"),
-            new Faker("Item 2"),
-            new Faker("Item 3")
+            Table table = new Table();{
+
+            table.AddColumn("ID");
+            table.AddColumn("Name");
+            table.AddColumn("Job");
+            
+            for (int i = 0; i < count; i++)
+            {
+                Name name = faker.Name;
+                table.AddRow($"{(i + 1)}", $"{name.FirstName()} {name.LastName()}", name.JobTitle());
+            }
+            
+            AnsiConsole.Write(table);
             }
         }
     }
 }
+                
+           
+
